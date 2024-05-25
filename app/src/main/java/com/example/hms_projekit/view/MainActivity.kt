@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //Muhammet Emir Add Friend
+
     private fun observeViewModel(){
         viewModel.event.observe(this) { events ->
             Log.d("MainActivitye", "Gelen veriler: $events")
