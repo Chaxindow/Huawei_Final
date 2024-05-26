@@ -1,14 +1,12 @@
 package com.example.hms_projekit.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.hms_projekit.R
 import com.example.hms_projekit.adapter.EventListAdapter
 import com.example.hms_projekit.databinding.FragmentEventListBinding
@@ -21,6 +19,7 @@ class EventListFragment : Fragment() {
     val month = "1" // Buralar dinamik olarak yapılandırlıcak
     val day = "1"   // Buralar dinamik olarak yapılandırlıcak
     override fun onCreate(savedInstanceState: Bundle?) {
+        viewModel = ViewModelProvider(this)[EventListViewModel::class.java]
         super.onCreate(savedInstanceState)
     }
 
@@ -29,19 +28,20 @@ class EventListFragment : Fragment() {
     ): View? {
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_event_list, container, false)
-        viewModel = ViewModelProvider(this)[EventListViewModel::class.java]
-
+        viewModel.fetchEvents(month, day)
+        observeViewModel()
         return binding.root
     }
 
     private fun observeViewModel() {
-        viewModel.event.observe(this) { events ->
-
+        viewModel.event.observe(viewLifecycleOwner) { events ->
+            adapter = EventListAdapter(events)
+            binding.rvEventList.adapter = adapter
         }
-        viewModel.eventLoad.observe(this) { isLoading ->
+        viewModel.eventLoad.observe(viewLifecycleOwner) { isLoading ->
             binding.tvError.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
-        viewModel.eventError.observe(this) { isError ->
+        viewModel.eventError.observe(viewLifecycleOwner) { isError ->
             binding.pbLoading.visibility = if (isError) View.VISIBLE else View.GONE
         }
 
