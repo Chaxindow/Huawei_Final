@@ -9,14 +9,14 @@ import androidx.core.view.WindowInsetsCompat
 // import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.hms_projekit.R
-import com.example.hms_projekit.viewmodel.MainViewModel
+import com.example.hms_projekit.viewmodel.EventListViewModel
 
 
 class MainActivity : AppCompatActivity() {
 
 
 
-    private lateinit var viewModel : MainViewModel
+    private lateinit var viewModel : EventListViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val month = "1" // Buralar dinamik olarak yapılandırlıcak
         val day = "1"   // Buralar dinamik olarak yapılandırlıcak
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this)[EventListViewModel::class.java]
         viewModel.fetchEvents(month,day)
 
         Log.d("MainActivitye", "Hello")
