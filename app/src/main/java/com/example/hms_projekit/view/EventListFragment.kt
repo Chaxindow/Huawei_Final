@@ -16,8 +16,8 @@ import com.example.hms_projekit.viewmodel.EventListViewModel
 
 class EventListFragment : Fragment() {
     private lateinit var binding: FragmentEventListBinding
-    private lateinit var adapter:EventListAdapter
-    private lateinit var viewModel : EventListViewModel
+    private lateinit var adapter: EventListAdapter
+    private lateinit var viewModel: EventListViewModel
     val month = "1" // Buralar dinamik olarak yapılandırlıcak
     val day = "1"   // Buralar dinamik olarak yapılandırlıcak
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +25,7 @@ class EventListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_event_list, container, false)
@@ -35,15 +34,15 @@ class EventListFragment : Fragment() {
         return binding.root
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         viewModel.event.observe(this) { events ->
 
         }
         viewModel.eventLoad.observe(this) { isLoading ->
-
+            binding.tvError.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
         viewModel.eventError.observe(this) { isError ->
-
+            binding.pbLoading.visibility = if (isError) View.VISIBLE else View.GONE
         }
 
     }
