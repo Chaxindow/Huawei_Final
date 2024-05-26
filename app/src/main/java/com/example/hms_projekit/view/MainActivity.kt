@@ -13,10 +13,6 @@ import com.example.hms_projekit.viewmodel.EventListViewModel
 
 
 class MainActivity : AppCompatActivity() {
-
-
-
-    private lateinit var viewModel : EventListViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,30 +22,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        val month = "1" // Buralar dinamik olarak yapılandırlıcak
-        val day = "1"   // Buralar dinamik olarak yapılandırlıcak
-
-        viewModel = ViewModelProvider(this)[EventListViewModel::class.java]
-        viewModel.fetchEvents(month,day)
-
-        Log.d("MainActivitye", "Hello")
-        observeViewModel()
-
     }
 
-    //Muhammet Emir Add Friend
-
-    private fun observeViewModel(){
-        viewModel.event.observe(this) { events ->
-            Log.d("MainActivitye", "Gelen veriler: $events")
-        }
-        viewModel.eventLoad.observe(this) { isLoading ->
-
-        }
-        viewModel.eventError.observe(this) { isError ->
-
-        }
-
-    }
 }
