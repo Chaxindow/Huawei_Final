@@ -16,8 +16,7 @@ class EventListFragment : Fragment() {
     private lateinit var binding: FragmentEventListBinding
     private lateinit var adapter: EventListAdapter
     private lateinit var viewModel: EventListViewModel
-    val month = "1" // Buralar dinamik olarak yapılandırlıcak
-    val day = "1"   // Buralar dinamik olarak yapılandırlıcak
+
     override fun onCreate(savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this)[EventListViewModel::class.java]
         super.onCreate(savedInstanceState)
@@ -28,7 +27,7 @@ class EventListFragment : Fragment() {
     ): View? {
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_event_list, container, false)
-        viewModel.fetchEvents(month, day)
+        viewModel.fetchEvents()
         observeViewModel()
         return binding.root
     }
