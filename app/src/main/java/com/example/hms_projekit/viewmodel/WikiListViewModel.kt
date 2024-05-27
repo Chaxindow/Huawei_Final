@@ -13,9 +13,5 @@ import retrofit2.Response
 import java.util.Calendar
 
 class WikiListViewModel : ViewModel() {
-
     val wikiList = MutableLiveData<List<WikipediaEntry>>()
-    val wikiListLoad = MutableLiveData<Boolean>()
-    val wikiListError = MutableLiveData<Boolean>()
-
 }

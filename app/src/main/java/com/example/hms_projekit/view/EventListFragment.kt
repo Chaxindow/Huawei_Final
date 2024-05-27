@@ -45,10 +45,10 @@ class EventListFragment : Fragment() {
             binding.rvEventList.adapter = adapter
         }
         viewModel.eventLoad.observe(viewLifecycleOwner) { isLoading ->
-            binding.tvError.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.pbLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
         viewModel.eventError.observe(viewLifecycleOwner) { isError ->
-            binding.pbLoading.visibility = if (isError) View.VISIBLE else View.GONE
+            binding.tvError.visibility = if (isError) View.VISIBLE else View.GONE
         }
 
     }
