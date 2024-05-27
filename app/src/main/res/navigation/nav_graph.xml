@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_grapg"
     app:startDestination="@id/eventListFragment">
     <fragment
         android:id="@+id/eventListFragment"
         android:name="com.example.hms_projekit.view.EventListFragment"
-        android:label="EventListFragment" />
+        android:label="EventListFragment" >
+        <action
+            android:id="@+id/action_eventListFragment_to_wikipediaTitleListFragment"
+            app:destination="@id/wikipediaTitleListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wikipediaTitleListFragment"
+        android:name="com.example.hms_projekit.view.WikipediaTitleListFragment"
+        android:label="WikipediaTitleListFragment" >
+        <argument
+            android:name="wikiItem"
+            app:argType="com.example.hms_projekit.model.WikipediaEntry[]" />
+    </fragment>
 </navigation>

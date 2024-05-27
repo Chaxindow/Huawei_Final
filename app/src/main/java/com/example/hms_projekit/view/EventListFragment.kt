@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.hms_projekit.R
 import com.example.hms_projekit.adapter.EventListAdapter
 import com.example.hms_projekit.databinding.FragmentEventListBinding
@@ -34,7 +35,13 @@ class EventListFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.event.observe(viewLifecycleOwner) { events ->
-            adapter = EventListAdapter(events)
+            adapter = EventListAdapter(events) { position: Int ->
+                findNavController().navigate(
+                    EventListFragmentDirections.actionEventListFragmentToWikipediaTitleListFragment(
+                        events[position].wikipedia.toTypedArray()
+                    )
+                )
+            }
             binding.rvEventList.adapter = adapter
         }
         viewModel.eventLoad.observe(viewLifecycleOwner) { isLoading ->

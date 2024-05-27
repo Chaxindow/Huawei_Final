@@ -9,7 +9,7 @@ import com.example.hms_projekit.R
 import com.example.hms_projekit.databinding.EventItemBinding
 import com.example.hms_projekit.model.Event
 
-class EventListAdapter(var eventList: List<Event>) :
+class EventListAdapter(var eventList: List<Event>, val onClick: (position: Int) -> Unit) :
     Adapter<EventListAdapter.EventListViewHolder>() {
     class EventListViewHolder(val itemBinding: EventItemBinding) : ViewHolder(itemBinding.root) {
         fun bind(event: Event) {
@@ -37,5 +37,6 @@ class EventListAdapter(var eventList: List<Event>) :
 
     override fun onBindViewHolder(holder: EventListViewHolder, position: Int) {
         holder.bind(eventList[position])
+        holder.itemView.setOnClickListener { onClick(position) }
     }
 }
