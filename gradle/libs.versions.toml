@@ -12,6 +12,11 @@ constraintlayout = "2.1.4"
 navigation="2.7.7"
 retrofit = "2.11.0"
 room = "2.6.1"
+agconnect = "1.9.1.302"
+agconnect-agcp = "1.7.1.300"
+gradle = "8.0.0"
+adsPrime = "3.4.71.300"
+push = "6.11.0.300"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +33,11 @@ squareup-retrofit ={group= "com.squareup.retrofit2", name="retrofit", version.re
 squareup-retrofit-converter-gson={group="com.squareup.retrofit2", name="converter-gson",version.ref = "retrofit"}
 androidx-room-runtime={group="androidx.room", name="room-runtime", version.ref="room"}
 androidx-room-compiler={group="androidx.room", name="room-compiler", version.ref="room"}
+huawei-ads-prime = {group="com.huawei.hms",name="ads-prime",version.ref="adsPrime"}
+agconnect-core = {group="com.huawei.agconnect",name="agconnect-core",version.ref="agconnect"}
+agconnect-agcp = {group="com.huawei.agconnect",name="agcp",version.ref="agconnect-agcp"}
+tools-grade = {group="com.android.tools.build",name="gradle",version.ref="gradle"}
+huawei-push = {group="com.huawei.hms",name="push",version.ref="push"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -35,3 +45,4 @@ jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "k
 kapt = {id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"}
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlin"  }
 androidx-navigation-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation"}
+agconnect = {id = "com.huawei.agconnect",version.ref="agconnect-agcp"}
