@@ -1,5 +1,8 @@
 package com.example.hms_projekit.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class EventResponse(
     val date: String,
     val wikipedia: String,
@@ -12,7 +15,8 @@ data class Event(
     val wikipedia: List<WikipediaEntry>
 )
 
+@Parcelize
 data class WikipediaEntry(
     val title: String,
     val wikipedia: String
-)
+): Parcelable

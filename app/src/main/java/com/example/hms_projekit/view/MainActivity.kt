@@ -6,17 +6,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
+// import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.hms_projekit.R
-import com.example.hms_projekit.viewmodel.MainViewModel
+import com.example.hms_projekit.viewmodel.EventListViewModel
+import com.huawei.hms.ads.HwAds
 
 
 class MainActivity : AppCompatActivity() {
-
-
-
-    private lateinit var viewModel : MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,27 +24,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val month = "1" // Buralar dinamik olarak yapılandırlıcak
-        val day = "1"   // Buralar dinamik olarak yapılandırlıcak
-
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.fetchEvents(month,day)
-
-        Log.d("MainActivitye", "Hello")
-        observeViewModel()
-
+        HwAds.init(this)
     }
 
-    private fun observeViewModel(){
-        viewModel.event.observe(this) { events ->
-            Log.d("MainActivitye", "Gelen veriler: $events")
-        }
-        viewModel.eventLoad.observe(this) { isLoading ->
-
-        }
-        viewModel.eventError.observe(this) { isError ->
-
-        }
-
-    }
 }

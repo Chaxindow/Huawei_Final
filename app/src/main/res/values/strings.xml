@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HMS_ProjeKit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="event_list_loading_error">Something went wrong!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
