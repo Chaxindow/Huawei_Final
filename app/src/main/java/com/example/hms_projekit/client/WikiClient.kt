@@ -6,9 +6,7 @@ import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.lifecycle.ViewModelStore
 import com.example.hms_projekit.view.description.WikiPageFragment
-import com.example.hms_projekit.viewmodel.WikiPageViewModel
 
 class WikiClient : WebViewClient() {
     //varsayılan tarayıcıya yönlendirilmemesi için client oluşturduk
