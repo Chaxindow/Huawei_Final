@@ -8,7 +8,10 @@ import com.example.hms_projekit.R
 import com.example.hms_projekit.databinding.WikipediaItemBinding
 import com.example.hms_projekit.model.WikipediaEntry
 
-class WikipediaEntryListAdapter(var wikiList: List<WikipediaEntry>) :
+class WikipediaEntryListAdapter(
+    var wikiList: List<WikipediaEntry>,
+    val onclick: (position: Int) -> Unit
+) :
     RecyclerView.Adapter<WikipediaEntryListAdapter.WikiListViewHolder>() {
     class WikiListViewHolder(val itemBinding: WikipediaItemBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -34,5 +37,6 @@ class WikipediaEntryListAdapter(var wikiList: List<WikipediaEntry>) :
 
     override fun onBindViewHolder(holder: WikiListViewHolder, position: Int) {
         holder.bind(wikiList[position])
+        holder.itemView.setOnClickListener { onclick(position) }
     }
 }
