@@ -28,7 +28,6 @@ class WikipediaTitleListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWikipediaTitleListBinding.inflate(layoutInflater, container, false)
-
         viewModel.wikiList.value = args.wikiItem.toList()
         observe()
         return binding.root

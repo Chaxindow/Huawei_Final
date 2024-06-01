@@ -14,8 +14,8 @@ import java.util.Calendar
 class EventListViewModel : ViewModel() {
 
     private val calendar = Calendar.getInstance()
-    private val  day = calendar.get(Calendar.DAY_OF_MONTH).toString()
-    private val  month = (calendar.get(Calendar.MONTH) + 1).toString()
+    private val day = calendar.get(Calendar.DAY_OF_MONTH).toString()
+    private val month = (calendar.get(Calendar.MONTH) + 1).toString()
 
     val event = MutableLiveData<List<Event>>()
     val eventLoad = MutableLiveData<Boolean>(false)
