@@ -23,16 +23,30 @@
             app:stackFromEnd="true"
             tools:listitem="@layout/event_item" />
 
-        <TextView
-            android:id="@+id/tv_error"
+
+        <LinearLayout
+            android:id="@+id/event_error_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loading_error"
+            android:orientation="vertical"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/hiad_network_error_tv" />
+
+            <TextView
+                android:id="@+id/tv_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/loading_error" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/pb_loading"
@@ -51,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            app:layout_constraintBottom_toBottomOf="@+id/rv_event_list"/>
+            app:layout_constraintBottom_toBottomOf="@+id/rv_event_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

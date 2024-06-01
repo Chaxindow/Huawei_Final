@@ -54,11 +54,11 @@ class EventListFragment : Fragment() {
             binding.pbLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
         viewModel.eventError.observe(viewLifecycleOwner) { isError ->
-            binding.tvError.visibility = if (isError) View.VISIBLE else View.GONE
+            binding.eventErrorLayout.visibility = if (isError) View.VISIBLE else View.GONE
         }
     }
 
-    private fun BannerAds(){
+    private fun BannerAds() {
         bannerView = binding.hwBannerView
         // Set the ad unit ID and ad dimensions. "testw6vs28auh3" is a dedicated test ad unit ID.
         bannerView.adId = "testw6vs28auh3"
