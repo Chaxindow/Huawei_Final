@@ -1,17 +1,23 @@
 package com.example.hms_projekit.viewmodel
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.hms_projekit.database.EventDao
+import com.example.hms_projekit.database.EventDatabase
 import com.example.hms_projekit.model.Event
 import com.example.hms_projekit.model.EventResponse
 import com.example.hms_projekit.service.EventAPIService
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.Calendar
 
-class EventListViewModel : ViewModel() {
+class EventListViewModel(application: Application) : AndroidViewModel(application) {
 
     private val calendar = Calendar.getInstance()
     private val day = calendar.get(Calendar.DAY_OF_MONTH).toString()
@@ -22,6 +28,15 @@ class EventListViewModel : ViewModel() {
     val eventError = MutableLiveData<Boolean>(false)
 
     private val eventApiService = EventAPIService()
+
+    private var eventDatabase:EventDatabase?=null
+    private var eventDao:EventDao?= null
+
+    init{
+        eventDatabase=EventDatabase.getInstance(application)
+        eventDao=eventDatabase?.eventDao()
+
+    }
 
     fun fetchEvents() {
 
@@ -45,5 +60,9 @@ class EventListViewModel : ViewModel() {
                 Log.d("MainViewModel", "fetchEvents function onFailure", t)
             }
         })
+    }
+
+    fun insertAll(list: List<Event>) = viewModelScope.launch{
+        eventDao?.insertAll(list)
     }
 }
