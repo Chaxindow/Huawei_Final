@@ -1,11 +1,10 @@
-package com.example.hms_projekit.view
+package com.example.hms_projekit.view.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -52,14 +51,14 @@ class EventListFragment : Fragment() {
             binding.rvEventList.adapter = adapter
         }
         viewModel.eventLoad.observe(viewLifecycleOwner) { isLoading ->
-            binding.tvError.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.pbLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
         viewModel.eventError.observe(viewLifecycleOwner) { isError ->
-            binding.pbLoading.visibility = if (isError) View.VISIBLE else View.GONE
+            binding.eventErrorLayout.visibility = if (isError) View.VISIBLE else View.GONE
         }
     }
 
-    private fun BannerAds(){
+    private fun BannerAds() {
         bannerView = binding.hwBannerView
         // Set the ad unit ID and ad dimensions. "testw6vs28auh3" is a dedicated test ad unit ID.
         bannerView.adId = "testw6vs28auh3"

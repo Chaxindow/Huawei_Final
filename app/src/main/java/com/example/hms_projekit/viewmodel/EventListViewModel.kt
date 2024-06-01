@@ -14,18 +14,18 @@ import java.util.Calendar
 class EventListViewModel : ViewModel() {
 
     private val calendar = Calendar.getInstance()
-    private val  day = calendar.get(Calendar.DAY_OF_MONTH).toString()
-    private val  month = (calendar.get(Calendar.MONTH) + 1).toString()
+    private val day = calendar.get(Calendar.DAY_OF_MONTH).toString()
+    private val month = (calendar.get(Calendar.MONTH) + 1).toString()
 
     val event = MutableLiveData<List<Event>>()
-    val eventLoad = MutableLiveData<Boolean>()
-    val eventError = MutableLiveData<Boolean>()
+    val eventLoad = MutableLiveData<Boolean>(false)
+    val eventError = MutableLiveData<Boolean>(false)
 
     private val eventApiService = EventAPIService()
 
     fun fetchEvents() {
 
-        eventLoad.value = false
+        eventLoad.value = true
 
         eventApiService.getData(month, day).enqueue(object : Callback<EventResponse> {
             override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {

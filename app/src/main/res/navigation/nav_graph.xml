@@ -5,7 +5,7 @@
     app:startDestination="@id/eventListFragment">
     <fragment
         android:id="@+id/eventListFragment"
-        android:name="com.example.hms_projekit.view.EventListFragment"
+        android:name="com.example.hms_projekit.view.home.EventListFragment"
         android:label="EventListFragment" >
         <action
             android:id="@+id/action_eventListFragment_to_wikipediaTitleListFragment"
@@ -13,10 +13,21 @@
     </fragment>
     <fragment
         android:id="@+id/wikipediaTitleListFragment"
-        android:name="com.example.hms_projekit.view.WikipediaTitleListFragment"
+        android:name="com.example.hms_projekit.view.wikilist.WikipediaTitleListFragment"
         android:label="WikipediaTitleListFragment" >
         <argument
             android:name="wikiItem"
             app:argType="com.example.hms_projekit.model.WikipediaEntry[]" />
+        <action
+            android:id="@+id/action_wikipediaTitleListFragment_to_wikiPageFragment"
+            app:destination="@id/wikiPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wikiPageFragment"
+        android:name="com.example.hms_projekit.view.description.WikiPageFragment"
+        android:label="WikiPageFragment" >
+        <argument
+            android:name="wikipediaURL"
+            app:argType="string" />
     </fragment>
 </navigation>
