@@ -38,6 +38,7 @@ agconnect-core = {group="com.huawei.agconnect",name="agconnect-core",version.ref
 agconnect-agcp = {group="com.huawei.agconnect",name="agcp",version.ref="agconnect-agcp"}
 tools-grade = {group="com.android.tools.build",name="gradle",version.ref="gradle"}
 huawei-push = {group="com.huawei.hms",name="push",version.ref="push"}
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

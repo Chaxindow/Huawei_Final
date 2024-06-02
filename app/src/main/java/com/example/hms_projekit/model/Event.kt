@@ -6,6 +6,8 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.hms_projekit.database.Converters
 import kotlinx.android.parcel.Parcelize
 
 
@@ -23,6 +25,7 @@ data class Event(
     @ColumnInfo(name="description")
     val description: String,
     @ColumnInfo(name="wikipedia")
+    @TypeConverters(Converters::class)
     val wikipedia: List<WikipediaEntry>
 )
 @Entity(

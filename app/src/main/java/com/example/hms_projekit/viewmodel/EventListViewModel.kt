@@ -11,6 +11,7 @@ import com.example.hms_projekit.database.EventDao
 import com.example.hms_projekit.database.EventDatabase
 import com.example.hms_projekit.model.Event
 import com.example.hms_projekit.model.EventResponse
+import com.example.hms_projekit.model.WikipediaEntry
 import com.example.hms_projekit.service.EventAPIService
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -65,8 +66,20 @@ class EventListViewModel(application: Application) : AndroidViewModel(applicatio
         })
     }
 
-    fun insertAll(list: List<Event>) = viewModelScope.launch{
-        eventDao?.insertAll(list)
+    fun insertAll(events: List<Event>) = viewModelScope.launch{
+        eventDao?.insertAll(events)
+        events.forEach{ event ->
+            val eventId = event.id
+            val entriesWithEventId = event.wikipedia.map { entry ->
+                WikipediaEntry(
+                    id=entry.id,
+                    title = entry.title,
+                    wikipedia = entry.wikipedia,
+                    eventId = eventId
+                )
+            }
+            entryDao?.insertAll((entriesWithEventId))
+        }
     }
 
     fun getEntriesForEvent(eventId:Int) = viewModelScope.launch {

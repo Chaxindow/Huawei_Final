@@ -78,4 +78,5 @@ dependencies {
     implementation(libs.huawei.ads.prime)
     implementation(libs.huawei.push)
 
+    implementation(libs.androidx.room.ktx)
 }

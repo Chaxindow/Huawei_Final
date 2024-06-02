@@ -4,9 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.hms_projekit.model.Event
+import com.example.hms_projekit.model.WikipediaEntry
 
-@Database(entities = [Event::class], version= 1)
+@Database(entities = [Event::class, WikipediaEntry::class], version= 1)
+@TypeConverters(Converters::class)
 abstract class EventDatabase : RoomDatabase(){
     abstract fun eventDao():EventDao
     abstract fun entryDao():EntryDao
