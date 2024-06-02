@@ -10,6 +10,7 @@ import com.example.hms_projekit.database.EventDatabase
 import com.example.hms_projekit.model.Event
 import com.example.hms_projekit.model.EventResponse
 import com.example.hms_projekit.service.EventAPIService
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,14 +52,23 @@ class EventListViewModel(application: Application) : AndroidViewModel(applicatio
                     eventError.value = true
                     Log.e("MainViewModel", "Error response code: ${response.code()}")
                 }
+                fetchAll()
             }
 
             override fun onFailure(call: Call<EventResponse>, t: Throwable) {
                 eventLoad.value = false
                 eventError.value = true
+                fetchAll()
                 Log.d("MainViewModel", "fetchEvents function onFailure", t)
             }
         })
+    }
+
+    fun fetchAll() = viewModelScope.launch {
+        delay(1000) //1 saniye bekleyip roomdan çekecek
+        event.value = eventDao?.getAll()
+        if(event.value?.size !=0)
+            eventError.value = false
     }
 
     fun insertAll(events: List<Event>) = viewModelScope.launch {
