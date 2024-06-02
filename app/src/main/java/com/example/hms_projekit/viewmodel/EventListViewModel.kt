@@ -72,6 +72,7 @@ class EventListViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun insertAll(events: List<Event>) = viewModelScope.launch {
+        eventDao?.deleteAll()
         eventDao?.insertAll(events)
     }
 }
