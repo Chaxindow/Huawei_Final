@@ -4,14 +4,11 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.hms_projekit.database.EntryDao
 import com.example.hms_projekit.database.EventDao
 import com.example.hms_projekit.database.EventDatabase
 import com.example.hms_projekit.model.Event
 import com.example.hms_projekit.model.EventResponse
-import com.example.hms_projekit.model.WikipediaEntry
 import com.example.hms_projekit.service.EventAPIService
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -31,14 +28,12 @@ class EventListViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val eventApiService = EventAPIService()
 
-    private var eventDatabase:EventDatabase?=null
-    private var eventDao:EventDao?= null
-    private var entryDao:EntryDao?=null
+    private var eventDatabase: EventDatabase? = null
+    private var eventDao: EventDao? = null
 
-    init{
-        eventDatabase=EventDatabase.getInstance(application)
-        eventDao=eventDatabase?.eventDao()
-        entryDao=eventDatabase?.entryDao()
+    init {
+        eventDatabase = EventDatabase.getInstance(application)
+        eventDao = eventDatabase?.eventDao()
     }
 
 
@@ -50,7 +45,7 @@ class EventListViewModel(application: Application) : AndroidViewModel(applicatio
             override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
                 eventLoad.value = false
                 if (response.isSuccessful) {
-                    event.value = response.body()?.events // Düzeltme burada
+                    event.value = response.body()?.events
                     eventError.value = false
                 } else {
                     eventError.value = true
@@ -66,23 +61,7 @@ class EventListViewModel(application: Application) : AndroidViewModel(applicatio
         })
     }
 
-    fun insertAll(events: List<Event>) = viewModelScope.launch{
+    fun insertAll(events: List<Event>) = viewModelScope.launch {
         eventDao?.insertAll(events)
-        events.forEach{ event ->
-            val eventId = event.id
-            val entriesWithEventId = event.wikipedia.map { entry ->
-                WikipediaEntry(
-                    id=entry.id,
-                    title = entry.title,
-                    wikipedia = entry.wikipedia,
-                    eventId = eventId
-                )
-            }
-            entryDao?.insertAll((entriesWithEventId))
-        }
-    }
-
-    fun getEntriesForEvent(eventId:Int) = viewModelScope.launch {
-        entryDao?.getEntriesForEvent(eventId)
     }
 }

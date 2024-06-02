@@ -6,26 +6,24 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.hms_projekit.model.Event
-import com.example.hms_projekit.model.WikipediaEntry
 
-@Database(entities = [Event::class, WikipediaEntry::class], version= 1)
+@Database(entities = [Event::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class EventDatabase : RoomDatabase(){
-    abstract fun eventDao():EventDao
-    abstract fun entryDao():EntryDao
+abstract class EventDatabase : RoomDatabase() {
+    abstract fun eventDao(): EventDao
 
     companion object {
         @Volatile
         private var INSTANCE: EventDatabase? = null
 
         fun getInstance(context: Context): EventDatabase {
-            return INSTANCE?: synchronized(this){
-                val instance= Room.databaseBuilder(
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
                     context.applicationContext,
                     EventDatabase::class.java,
                     "event-db"
                 ).build()
-                INSTANCE=instance
+                INSTANCE = instance
                 instance
             }
         }
