@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hms_projekit.database.EntryDao
 import com.example.hms_projekit.database.EventDao
 import com.example.hms_projekit.database.EventDatabase
 import com.example.hms_projekit.model.Event
@@ -31,12 +32,14 @@ class EventListViewModel(application: Application) : AndroidViewModel(applicatio
 
     private var eventDatabase:EventDatabase?=null
     private var eventDao:EventDao?= null
+    private var entryDao:EntryDao?=null
 
     init{
         eventDatabase=EventDatabase.getInstance(application)
         eventDao=eventDatabase?.eventDao()
-
+        entryDao=eventDatabase?.entryDao()
     }
+
 
     fun fetchEvents() {
 
@@ -64,5 +67,9 @@ class EventListViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun insertAll(list: List<Event>) = viewModelScope.launch{
         eventDao?.insertAll(list)
+    }
+
+    fun getEntriesForEvent(eventId:Int) = viewModelScope.launch {
+        entryDao?.getEntriesForEvent(eventId)
     }
 }
